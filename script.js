@@ -74,18 +74,6 @@ document.querySelectorAll('.story-text, .feature-card, .coming-soon-content, .wa
     observer.observe(el);
 });
 
-// Enhanced glitch effect for hero title
-const glitchElements = document.querySelectorAll('.glitch');
-glitchElements.forEach(element => {
-    let glitchInterval = setInterval(() => {
-        if (Math.random() > 0.85) {
-            element.style.animation = 'none';
-            setTimeout(() => {
-                element.style.animation = '';
-            }, 50 + Math.random() * 100);
-        }
-    }, 3000);
-});
 
 // Feature cards hover effect
 document.querySelectorAll('.feature-card').forEach(card => {
