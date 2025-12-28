@@ -1,37 +1,36 @@
-// Sayfa kaydırıldığında navigasyonun arka planını koyulaştır
-window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav');
-    if (window.scrollY > 50) {
-        nav.style.background = 'rgba(0, 0, 0, 0.9)';
-    } else {
-        nav.style.background = 'linear-gradient(to bottom, rgba(0,0,0,0.8), transparent)';
+const langBtn = document.getElementById('lang-btn');
+let currentLang = 'TR';
+
+const translations = {
+    'TR': {
+        navHome: 'Giriş',
+        navAbout: 'Hikaye',
+        heroSub: 'Karanlıkta kalan son kontrol sen misin?',
+        btnTrailer: 'FRAGMANI İZLE',
+        storyTitle: 'HİKAYE',
+        storyDesc: 'Terk edilmiş bir araştırma tesisinde uyandığında, elinde sadece bozulmaya yüz tutmuş bir telsiz var. Sesler sana ne yapman gerektiğini söylüyor ama onlara güvenebilir misin? Last Control, Flash In\'in sunduğu en derin psikolojik gerilim deneyimi.',
+        credits: 'EMEĞİ GEÇENLER'
+    },
+    'EN': {
+        navHome: 'Home',
+        navAbout: 'Story',
+        heroSub: 'Are you the last control in the dark?',
+        btnTrailer: 'WATCH TRAILER',
+        storyTitle: 'STORY',
+        storyDesc: 'When you wake up in an abandoned research facility, you only have a decaying radio in your hand. Voices tell you what to do, but can you trust them? Last Control is the deepest psychological horror experience from Flash In.',
+        credits: 'CREDITS'
     }
-});
-
-// Fare hareketine göre "vignette" (karartma) takibi (Opsiyonel Atmosfer)
-document.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth) * 100;
-    const y = (e.clientY / window.innerHeight) * 100;
-    
-    // Hafif bir fener efekti gibi takip etmesini istersen burayı kullanabilirsin
-    // document.querySelector('.vignette').style.background = `radial-gradient(circle at ${x}% ${y}%, transparent 10%, black 80%)`;
-});
-
-// Bölüm Giriş Animasyonları
-const observerOptions = {
-    threshold: 0.2
 };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.content-section').forEach(section => {
-    observer.observe(section);
+langBtn.addEventListener('click', () => {
+    currentLang = currentLang === 'TR' ? 'EN' : 'TR';
+    langBtn.innerText = currentLang === 'TR' ? 'EN' : 'TR';
+    
+    document.getElementById('nav-home').innerText = translations[currentLang].navHome;
+    document.getElementById('nav-about').innerText = translations[currentLang].navAbout;
+    document.getElementById('hero-sub').innerText = translations[currentLang].heroSub;
+    document.getElementById('btn-trailer').innerText = translations[currentLang].btnTrailer;
+    document.getElementById('story-title').innerText = translations[currentLang].storyTitle;
+    document.getElementById('story-desc').innerText = translations[currentLang].storyDesc;
+    document.getElementById('footer-credits').innerText = translations[currentLang].credits;
 });
-
-console.log("Last Control - Flash In Studios hazır.");
